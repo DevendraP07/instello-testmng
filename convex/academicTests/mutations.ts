@@ -8,10 +8,7 @@ import {
 import * as AssessmentSchema from "./model/assessmentSchema";
 import * as AssessmentComponent from "./model/assessmentComponent";
 
-/**
- * **Create assessment schema**
- * Assessment schema is format for conduct the test
- */
+/** **Create assessment schema** */
 export const createAssessmentSchema = mutation({
   args: insertAssessmentSchemaValidator,
   returns: v.id("assessmentSchemas"),
@@ -20,15 +17,16 @@ export const createAssessmentSchema = mutation({
   },
 });
 
-/**
- * **Create assessment component**
- * Creates component which holds contraints of validation
- */
-export const createAssessmentComponent = mutation({
+/** **Add assessment component to the assessment schema** */
+export const addAssessmentComponent = mutation({
   args: insertAssessmentComponentValidator,
   returns: v.id("assessmentComponents"),
   handler: async (ctx, args) => {
-    return await AssessmentComponent.create(ctx.db, args);
+    return await AssessmentComponent.create(
+      ctx.db,
+      args.assessmentSchemaId,
+      args.body,
+    );
   },
 });
 

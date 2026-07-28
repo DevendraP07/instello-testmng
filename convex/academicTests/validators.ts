@@ -10,12 +10,17 @@ export type InsertAssessmentSchemaValidator = Infer<
 >;
 
 export const insertAssessmentComponentValidator = v.object({
-  name: v.string(),
-  totalAllotedMarks: v.number(),
-  passingMarks: v.number(),
-  orderIdx: v.number(),
+  body: v.object({
+    name: v.string(),
+    totalAllotedMarks: v.number(),
+    passingMarks: v.number(),
+  }),
   assessmentSchemaId: v.id("assessmentSchemas"),
 });
+
+export type InsertAssessmentComponentValidator = Infer<
+  typeof insertAssessmentComponentValidator
+>;
 
 export const updateAssessmentComponentValidator = v.object({
   id: v.id("assessmentComponents"),

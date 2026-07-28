@@ -17,5 +17,7 @@ export const academicTestsTables = {
     assessmentSchemaId: v.id("assessmentSchemas"),
     createdAt: v.number(),
     updatedAt: v.optional(v.number()),
+  }).index("by_assessmentSchema_orderIdx", {
+    fields: ["assessmentSchemaId", "orderIdx"],
   }),
 };
