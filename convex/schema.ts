@@ -1,17 +1,6 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+import { defineSchema } from "convex/server";
+import { testsTables } from "./tests/schema";
 
 export default defineSchema({
-  users: defineTable({
-    name: v.string(),
-    email: v.string(),
-    createdAt: v.number(),
-    updatedAt: v.optional(v.number()),
-  }),
-  todo: defineTable({
-    name: v.string(),
-    isCompleted: v.boolean(),
-    createdAt: v.number(),
-    updatedAt: v.optional(v.number()),
-  }),
+  ...testsTables,
 });

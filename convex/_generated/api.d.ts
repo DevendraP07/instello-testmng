@@ -8,8 +8,10 @@
  * @module
  */
 
-import type * as todo from "../todo.js";
-import type * as users from "../users.js";
+import type * as helpers_types from "../helpers/types.js";
+import type * as tests_model_assessmentSchema from "../tests/model/assessmentSchema.js";
+import type * as tests_mutations from "../tests/mutations.js";
+import type * as tests_validators from "../tests/validators.js";
 
 import type {
   ApiFromModules,
@@ -18,8 +20,10 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  todo: typeof todo;
-  users: typeof users;
+  "helpers/types": typeof helpers_types;
+  "tests/model/assessmentSchema": typeof tests_model_assessmentSchema;
+  "tests/mutations": typeof tests_mutations;
+  "tests/validators": typeof tests_validators;
 }>;
 
 /**
