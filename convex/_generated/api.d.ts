@@ -9,8 +9,10 @@
  */
 
 import type * as helpers_types from "../helpers/types.js";
+import type * as tests_model_assessmentComponent from "../tests/model/assessmentComponent.js";
 import type * as tests_model_assessmentSchema from "../tests/model/assessmentSchema.js";
 import type * as tests_mutations from "../tests/mutations.js";
+import type * as tests_queries from "../tests/queries.js";
 import type * as tests_validators from "../tests/validators.js";
 
 import type {
@@ -21,8 +23,10 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   "helpers/types": typeof helpers_types;
+  "tests/model/assessmentComponent": typeof tests_model_assessmentComponent;
   "tests/model/assessmentSchema": typeof tests_model_assessmentSchema;
   "tests/mutations": typeof tests_mutations;
+  "tests/queries": typeof tests_queries;
   "tests/validators": typeof tests_validators;
 }>;
 
