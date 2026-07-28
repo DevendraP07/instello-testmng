@@ -1,18 +1,19 @@
 import { ConvexError, v } from "convex/values";
 import { mutation } from "#_generated/server";
 import {
-  InsertAssessmentComponent,
-  InsertAssessmentSchema,
+  insertAssessmentComponentValidator,
+  insertAssessmentSchemaValidator,
+  updateAssessmentComponentValidator,
 } from "./validators";
 import * as AssessmentSchema from "./model/assessmentSchema";
-import * as AssessmentComponent from "./model/assessmentComponent"
+import * as AssessmentComponent from "./model/assessmentComponent";
 
 /**
  * **Create assessment schema**
  * Assessment schema is format for conduct the test
  */
 export const createAssessmentSchema = mutation({
-  args: InsertAssessmentSchema,
+  args: insertAssessmentSchemaValidator,
   returns: v.id("assessmentSchemas"),
   handler: async (ctx, args) => {
     return await AssessmentSchema.create(ctx.db, args);
@@ -24,10 +25,10 @@ export const createAssessmentSchema = mutation({
  * Creates component which holds contraints of validation
  */
 export const createAssessmentComponent = mutation({
-  args: InsertAssessmentComponent,
+  args: insertAssessmentComponentValidator,
   returns: v.id("assessmentComponents"),
   handler: async (ctx, args) => {
-    return await AssessmentComponent.create(ctx.db,args)
+    return await AssessmentComponent.create(ctx.db, args);
   },
 });
 
@@ -46,15 +47,13 @@ export const reorderAssessmentComponent = mutation({
  * **Update assessment component details**
  */
 export const updateAssessmentComponent = mutation({
-  args: {id:v.id("assessmentComponents"), newName:v.string(),newPassingMarks:v.number(),newTotalAllotedMarks:v.number()},
+  args: updateAssessmentComponentValidator,
   handler: async (ctx, args) => {
-    const isAvaliable= await ctx.db.get(args.id)
-    if(!isAvaliable)
+    const isAvaliable = await ctx.db.get(args.id);
+
+    if (!isAvaliable)
       throw new ConvexError("Assessment component not available");
-    await AssessmentComponent.update(ctx.db,args.id,{
-      name:args.newName,
-      passingMarks:args.newPassingMarks,
-      totalAllotedMarks:args.newTotalAllotedMarks,
-    });
+
+    await AssessmentComponent.update(ctx.db, args.id, args.body);
   },
 });
