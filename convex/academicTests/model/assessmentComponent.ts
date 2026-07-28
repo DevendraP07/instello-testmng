@@ -6,7 +6,11 @@ export async function create(
   db: DbWriter,
   body: Pick<
     Doc<"assessmentComponents">,
-    "name" | "totalAllotedMarks" | "passingMarks" | "orderIdx"
+    | "name"
+    | "totalAllotedMarks"
+    | "passingMarks"
+    | "orderIdx"
+    | "assessmentSchemaId"
   >,
 ) {
   return await db.insert("assessmentComponents", {
@@ -32,4 +36,3 @@ export async function update(
     updatedAt: Date.now(),
   });
 }
-

@@ -1,7 +1,7 @@
 import { defineTable } from "convex/server";
 import { v } from "convex/values";
 
-export const testsTables = {
+export const academicTestsTables = {
   assessmentSchemas: defineTable({
     name: v.string(),
     description: v.optional(v.string()),
@@ -14,6 +14,7 @@ export const testsTables = {
     totalAllotedMarks: v.number(),
     passingMarks: v.number(),
     orderIdx: v.number(),
+    assessmentSchemaId: v.id("assessmentSchemas"),
     createdAt: v.number(),
     updatedAt: v.optional(v.number()),
   }),

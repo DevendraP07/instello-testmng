@@ -8,12 +8,12 @@
  * @module
  */
 
+import type * as academicTests_model_assessmentComponent from "../academicTests/model/assessmentComponent.js";
+import type * as academicTests_model_assessmentSchema from "../academicTests/model/assessmentSchema.js";
+import type * as academicTests_mutations from "../academicTests/mutations.js";
+import type * as academicTests_queries from "../academicTests/queries.js";
+import type * as academicTests_validators from "../academicTests/validators.js";
 import type * as helpers_types from "../helpers/types.js";
-import type * as tests_model_assessmentComponent from "../tests/model/assessmentComponent.js";
-import type * as tests_model_assessmentSchema from "../tests/model/assessmentSchema.js";
-import type * as tests_mutations from "../tests/mutations.js";
-import type * as tests_queries from "../tests/queries.js";
-import type * as tests_validators from "../tests/validators.js";
 
 import type {
   ApiFromModules,
@@ -22,12 +22,12 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  "academicTests/model/assessmentComponent": typeof academicTests_model_assessmentComponent;
+  "academicTests/model/assessmentSchema": typeof academicTests_model_assessmentSchema;
+  "academicTests/mutations": typeof academicTests_mutations;
+  "academicTests/queries": typeof academicTests_queries;
+  "academicTests/validators": typeof academicTests_validators;
   "helpers/types": typeof helpers_types;
-  "tests/model/assessmentComponent": typeof tests_model_assessmentComponent;
-  "tests/model/assessmentSchema": typeof tests_model_assessmentSchema;
-  "tests/mutations": typeof tests_mutations;
-  "tests/queries": typeof tests_queries;
-  "tests/validators": typeof tests_validators;
 }>;
 
 /**

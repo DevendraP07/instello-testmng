@@ -1,15 +1,20 @@
-import { v } from "convex/values";
+import { Infer, v } from "convex/values";
 
 export const insertAssessmentSchemaValidator = v.object({
   name: v.string(),
   description: v.optional(v.string()),
 });
 
+export type InsertAssessmentSchemaValidator = Infer<
+  typeof insertAssessmentSchemaValidator
+>;
+
 export const insertAssessmentComponentValidator = v.object({
   name: v.string(),
   totalAllotedMarks: v.number(),
   passingMarks: v.number(),
   orderIdx: v.number(),
+  assessmentSchemaId: v.id("assessmentSchemas"),
 });
 
 export const updateAssessmentComponentValidator = v.object({
