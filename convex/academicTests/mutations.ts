@@ -13,9 +13,15 @@ export const createAssessmentSchema = mutation({
   args: insertAssessmentSchemaValidator,
   returns: v.id("assessmentSchemas"),
   handler: async (ctx, args) => {
+    const assessmentSchema =await AssessmentSchema.isExists(ctx.db,args.name,);
+
+    if(assessmentSchema)
+      throw new ConvexError ("Assessment schema already exists")
+
     return await AssessmentSchema.create(ctx.db, args);
   },
 });
+
 
 /** **Add assessment component to the assessment schema** */
 export const addAssessmentComponent = mutation({
@@ -47,11 +53,13 @@ export const reorderAssessmentComponent = mutation({
 export const updateAssessmentComponent = mutation({
   args: updateAssessmentComponentValidator,
   handler: async (ctx, args) => {
-    const isAvaliable = await ctx.db.get(args.id);
+    const isAvailable = await ctx.db.get(args.id);
 
-    if (!isAvaliable)
+    if (!isAvailable)
       throw new ConvexError("Assessment component not available");
 
     await AssessmentComponent.update(ctx.db, args.id, args.body);
   },
 });
+
+

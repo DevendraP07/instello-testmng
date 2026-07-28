@@ -53,6 +53,9 @@ describe("academicTests.addAssessmentComponent", () => {
     const assessmentSchemaId = await t.run((c) =>
       c.db.insert("assessmentSchemas", {
         ...mockAssessmentSchema,
+        normalizedName:mockAssessmentSchema.name
+        .replaceAll(" ","")
+        .toLowerCase(),
         createdAt: Date.now(),
       }),
     );
@@ -73,5 +76,41 @@ describe("academicTests.addAssessmentComponent", () => {
     expect(assessmentComponents).toMatchObject(
       mockAssessmentComponents.map((mac, orderIdx) => ({ ...mac, orderIdx })),
     );
+  });
+});
+
+
+
+
+test("should not allow duplicate assessment schema", async ({ t }) => {
+  // Arrange
+  const body = {
+    name: "I am Devendra",
+    description: "Internal Test",
+  };
+
+  await t.mutation(
+    api.academicTests.mutations.createAssessmentSchema,
+    body,
+  );
+
+  // Act
+  let error;
+
+  try {
+    await t.mutation(
+      api.academicTests.mutations.createAssessmentSchema,
+      {
+        name: "I AM DEVENDRA",
+        description: "Another Test",
+      },
+    );
+  } catch (e) {
+    error = e;
+  }
+
+  // Assert
+  expect(error).toMatchObject({
+    data: "Assessment schema already exists",
   });
 });

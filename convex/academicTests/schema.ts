@@ -4,9 +4,14 @@ import { v } from "convex/values";
 export const academicTestsTables = {
   assessmentSchemas: defineTable({
     name: v.string(),
+    normalizedName:v.string(),
     description: v.optional(v.string()),
     createdAt: v.number(),
     updatedAt: v.optional(v.number()),
+  }).index("by_name",{
+    fields:["name"],
+  }).index("by_normalizedName",{
+    fields:["normalizedName"],
   }),
 
   assessmentComponents: defineTable({
