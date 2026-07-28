@@ -3,6 +3,13 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "imports": {
+    "#*": {
+      "types": "./convex/*.d.ts",
+      "import": "./convex/*.js",
+      "default": "./convex/*.ts"
+    }
+  },
   "scripts": {
     "dev": "convex dev",
     "test": "vitest run",
